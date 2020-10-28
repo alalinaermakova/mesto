@@ -1,0 +1,14 @@
+.button__like {
+    background-image: url(../../../images/Vector.svg);
+    height: 19px;
+    width: 21px;
+    border: unset;
+    background-color: #ffffff;
+    margin-right: 20px;
+    padding-left: 15px;
+    transition: opacity 0,5s linear;
+}
+
+.button__like:hover {
+    opacity: 0.6;
+}

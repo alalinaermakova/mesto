@@ -1,0 +1,10 @@
+.element {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: unset;
+    max-width: 282px;
+    border-radius: 3%;
+    overflow: hidden;
+
+}

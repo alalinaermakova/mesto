@@ -1,0 +1,23 @@
+.button__add {
+    width: 150px;
+    height: 50px;
+    background-color: #000000;
+    border: 2px solid #ffffff;
+    background-image: url(../../../images/Vector\ copy.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: auto;
+    transition: opacity 0,5s linear;
+}
+
+  .button__add:hover {
+    opacity: 0.6;
+  }
+
+  @media screen and (max-width: 660px) {
+    .button__add {
+      margin: 0 auto 36px;
+      width: 282px;
+      height: 50px;
+    }
+  }

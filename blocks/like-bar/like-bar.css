@@ -1,0 +1,12 @@
+.like-bar {
+    background-color: #ffffff;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -5px;
+    height: 21%;
+    bottom: 0;
+    
+}
