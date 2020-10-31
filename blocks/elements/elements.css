@@ -14,6 +14,7 @@
 @media screen and (max-width: 900px){
     .elements {
         grid-template-columns: repeat(2, 282px);
+        margin-top: 40px;
 
     }
 }
@@ -23,5 +24,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top: 5px;
     }
 }

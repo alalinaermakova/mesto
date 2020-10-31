@@ -13,57 +13,70 @@
             </header>
             <section class="profile">
                 <img class="profile__img" alt="фото Жак-Ив Кусто" src="./images/image.png">
-                <div class="personal-info">
-                    <h1 class="profile__name">Жак-Ив Кусто <button class="button__change"></button></h1>
+                <div class="profile__info">
+                    <div class="profile__edit">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button class="profile__button_edit"></button>
+                    </div>
                     <h2 class="profile__description">Исследователь океана</h2>
                 </div>
-                <button class="button__add" href="#"></div>
-                </button>
+                <button class="profile__button_add" href="#"></button>
             </section>
             <section class="photo-grid">
                 <ul class="elements">
                     <li class="element">
                         <img class="element__item" alt="закат на фоне Эльбруса" src="./images/kirill-pershin-1404681-unsplash.png">
                         <div class="like-bar"><h3 class="element__description">Гора Эльбрус</h3>
-                            <button class="button__like"></button>
+                            <button class="element__button_like"></button>
                         </div>
                     </li>
                     <li class="element">
                         <img class="element__item" alt="замок в Карачаево-Черкесии" src="./images/kirill-pershin-1088404-unsplash.png">
                         <div class="like-bar"><h3 class="element__description">Карачаево-Черкесия</h3>
-                            <button class="button__like"></button>
+                            <button class="element__button_like"></button>
                         </div>
                     </li>
                     <li class="element">
                         <img class="element__item" alt="горы Домбая" src="./images/kirill-pershin-1556355-unsplash.png">
                         <div class="like-bar"><h3 class="element__description">Домбай</h3>
-                            <button class="button__like"></button>
+                            <button class="element__button_like"></button>
                         </div>
                     </li>
                     <li class="element">
                         <img class="element__item" alt="горы Домбая" src="./images/kirill-pershin-1556355-unsplash.png">
                         <div class="like-bar"><h3 class="element__description">Домбай</h3>
-                            <button class="button__like"></button>
+                            <button class="element__button_like"></button>
                         </div>
                     </li>
                     <li class="element">
                         <img class="element__item" alt="Гора Эльбрус на закате" src="./images/kirill-pershin-1404681-unsplash.png">
                         <div class="like-bar"><h3 class="element__description">Гора Эльбрус</h3>
-                            <button class="button__like"></button>
+                            <button class="element__button_like"></button>
                         </div>
                     </li>
                     <li class="element">
                         <img class="element__item" alt="замок Карачаевска" src="./images/kirill-pershin-1088404-unsplash.png">
                         <div class="like-bar"><h3 class="element__description">Карачаевск</h3>
-                            <button class="button__like"></button>
+                            <button class="element__button_like"></button>
                         </div>
                     </li>
                 </ul>
             </section>
-
+            <div class="pop-up">
+                <div class="pop-up__content">
+                    <img class="pop-up__button_close" src="./images/Close Icon.svg">
+                    <h2 class="pop-up__title">Редактировать профиль</h1>
+                    <form class="pop-up__form">
+                        <input type="text" placeholder="Имя" class="pop-up__form_input input_form_name">
+                        <input type="text" placeholder="O себе" class="pop-up__form_input input_form_description">
+                        <button type="submit" class="pop-up__button_submit">Сохранить</button>
+                    </form>
+                </div>
+            </div>
         </main>
         <footer class="footer">
             <p class="footer_copyright">© 2020 Mesto Russia</p>
         </footer>
+        <script src="./scripts/index.js"></script>
     </body>
 </html>
