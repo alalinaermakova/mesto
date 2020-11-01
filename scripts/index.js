@@ -30,5 +30,3 @@ function submitForm(event) {
 
 form.addEventListener('submit', submitForm);
 form.addEventListener('submit', closePopup);
-
-
