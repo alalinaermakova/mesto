@@ -1,22 +1,17 @@
 let popup = document.querySelector('.pop-up');
-let changeButton = document.querySelector('.profile__button_edit');
-let closeButton = document.querySelector('.pop-up__button_close');
+let changeButton = document.querySelector('.profile__button-edit');
+let closeButton = document.querySelector('.pop-up__button-close');
 let name = document.querySelector('.profile__name');
 let description = document.querySelector('.profile__description');
 let form = document.querySelector('.pop-up__form');
-let nameField = document.querySelector('.input_form_name');
-let descriptionField = document.querySelector('.input_form_description');
-
-changeButton.addEventListener('click', showPopup);
+let nameField = document.querySelector('.input__name');
+let descriptionField = document.querySelector('.input__description');
 
 function showPopup() {
-    popup.classList.add('pop-up_edit');
     nameField.value = name.textContent;
     descriptionField.value = description.textContent;
-
+    popup.classList.add('pop-up_edit');
 }
-
-closeButton.addEventListener('click', closePopup);
 
 function closePopup() {
     popup.classList.remove('pop-up_edit');
@@ -26,7 +21,9 @@ function submitForm(event) {
     event.preventDefault();
     name.textContent = nameField.value;
     description.textContent = descriptionField.value;
+    closePopup();
 }
 
 form.addEventListener('submit', submitForm);
-form.addEventListener('submit', closePopup);
+changeButton.addEventListener('click', showPopup);
+closeButton.addEventListener('click', closePopup);

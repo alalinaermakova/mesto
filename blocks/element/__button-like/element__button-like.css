@@ -1,15 +1,15 @@
-.element__button_like {
-    background-image: url(../../../../images/Vector.svg);
+.element__button-like {
+    background-image: url(../../../images/Vector.svg);
+    background-position: center;
     height: 19px;
     width: 21px;
     border: unset;
     background-color: #ffffff;
     margin-right: 20px;
-    padding-left: 15px;
     transition: opacity 0,5s linear;
     cursor: pointer;
 }
 
-.element__button_like:hover {
+.element__button-like:hover {
     opacity: 0.6;
 }
