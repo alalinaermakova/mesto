@@ -8,12 +8,12 @@
 @media screen and (max-width: 900px) {
     .profile {
         margin-left: 20px;
-        margin-right: 20px; 
+        margin-right: 20px;
     }
 }
 
 @media screen and (max-width: 700px) {
     .profile {
-        flex-direction: column; 
+        flex-direction: column;
     }
 }

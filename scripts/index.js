@@ -4,8 +4,8 @@ let closeButton = document.querySelector('.pop-up__button-close');
 let name = document.querySelector('.profile__name');
 let description = document.querySelector('.profile__description');
 let form = document.querySelector('.pop-up__form');
-let nameField = document.querySelector('.input__name');
-let descriptionField = document.querySelector('.input__description');
+let nameField = document.querySelector('.input_name');
+let descriptionField = document.querySelector('.input_description');
 
 function showPopup() {
     nameField.value = name.textContent;
