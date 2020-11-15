@@ -6,7 +6,7 @@
     border: unset;
     background-color: #ffffff;
     margin-right: 20px;
-    transition: opacity 0,5s linear;
+    transition: opacity 0.3s;
     cursor: pointer;
 }
 

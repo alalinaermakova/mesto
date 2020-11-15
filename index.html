@@ -24,48 +24,16 @@
             </section>
             <section class="photo-grid">
                 <ul class="elements">
-                    <li class="element">
-                        <img class="element__item" alt="закат на фоне Эльбруса" src="./images/kirill-pershin-1404681-unsplash.png">
-                        <div class="element__like-bar">
-                            <h3 class="element__description">Гора Эльбрус</h3>
-                            <button type="button" class="element__button-like"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img class="element__item" alt="замок в Карачаево-Черкесии" src="./images/kirill-pershin-1088404-unsplash.png">
-                        <div class="element__like-bar">
-                            <h3 class="element__description">Карачаево-Черкесия</h3>
-                            <button type="button" class="element__button-like"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img class="element__item" alt="горы Домбая" src="./images/kirill-pershin-1556355-unsplash.png">
-                        <div class="element__like-bar">
-                            <h3 class="element__description">Домбай</h3>
-                            <button type="button" class="element__button-like"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img class="element__item" alt="горы Домбая" src="./images/kirill-pershin-1556355-unsplash.png">
-                        <div class="element__like-bar">
-                            <h3 class="element__description">Домбай</h3>
-                            <button type="button" class="element__button-like"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img class="element__item" alt="Гора Эльбрус на закате" src="./images/kirill-pershin-1404681-unsplash.png">
-                        <div class="element__like-bar">
-                            <h3 class="element__description">Гора Эльбрус</h3>
-                            <button type="button" class="element__button-like"></button>
-                        </div>
-                    </li>
-                    <li class="element">
-                        <img class="element__item" alt="замок Карачаевска" src="./images/kirill-pershin-1088404-unsplash.png">
-                        <div class="element__like-bar">
-                            <h3 class="element__description">Карачаевск</h3>
-                            <button type="button" class="element__button-like"></button>
-                        </div>
-                    </li>
+                    <template id="post-template">
+                        <li class="element">
+                            <button class="element__button-delete" type="button"></button>
+                            <img class="element__item element__item_input" alt="" src="">
+                            <div class="element__like-bar">
+                                <h3 class="element__description element__text_input"></h3>
+                                <button type="button" class="element__button-like"></button>
+                            </div>
+                        </li>
+                    </template>
                 </ul>
             </section>
             <div class="pop-up">
@@ -78,6 +46,24 @@
                         <button type="submit" class="pop-up__button-submit">Сохранить</button>
                     </form>
                 </div>
+            </div>
+            <div class="pop-up">
+                <div class="pop-up__content">
+                    <button class="pop-up__button-close" type="button"></button>
+                    <h2 class="pop-up__title">Новое место</h2>
+                    <form class="pop-up__form_photo" name="form">
+                        <input name="name" type="text" placeholder="Название" class="pop-up__input pop-up__input_post-name">
+                        <input name="description" type="text" placeholder="Ссылка на картинку" class="pop-up__input pop-up__input_post-link">
+                        <button type="submit" class="pop-up__button-submit_photo">Создать</button>
+                    </form>
+                </div>
+            </div>
+            <div class="pop-up pop-up_dark">
+                <div class="popup__content_photo">
+                    <button class="pop-up__button-close" type="button"></button>
+                    <img class="pop-up__img">
+                    <p class="pop-up__post-title"></p>
+                </div> 
             </div>
         </main>
         <footer class="footer">

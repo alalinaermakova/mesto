@@ -1,0 +1,7 @@
+.popup__content_photo {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 90px auto 90px;
+    text-align: left;
+}

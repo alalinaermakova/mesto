@@ -19,7 +19,7 @@
 @media screen and (max-width: 660px) {
     .pop-up__button-close {
         background-image: url(../../../images/Close\ Icon\ copy.svg);
-        top: -50px;
-        right: 1px;
+        top: -34px;
+        right: -34px;
     }
 }

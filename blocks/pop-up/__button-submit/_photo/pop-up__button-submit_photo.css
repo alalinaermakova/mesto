@@ -1,0 +1,26 @@
+.pop-up__button-submit_photo {
+    width: 100%;
+    height: 50px;
+    border: 1px solid rgba(0,0,0,.2);
+    margin-top: 25px;
+    background-color: #000000;
+    color: #ffffff;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    transition: opacity 0,5s linear;
+    cursor: pointer;
+}
+
+.pop-up__button-submit_photo:hover {
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 660px) {
+    .pop-up__button-submit_photo {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

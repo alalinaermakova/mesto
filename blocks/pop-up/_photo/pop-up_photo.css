@@ -1,4 +1,4 @@
-.pop-up {
+.pop-up_photo {
     z-index: 1;
     position: fixed;
     top: 0;
@@ -13,6 +13,3 @@
     opacity: 0;
     transition: opacity .5s, visibility .5s;
 }
-
-
-
