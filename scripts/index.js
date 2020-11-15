@@ -15,6 +15,7 @@ const descriptionField = document.querySelector('.pop-up__input_description');
 const postContainer = document.querySelector('.elements');
 const postName = document.querySelector('.pop-up__input_post-name');
 const postLink = document.querySelector('.pop-up__input_post-link');
+const postTemplate = document.querySelector('#post-template').content;
 
 const initialCards = [
     {
@@ -43,8 +44,7 @@ const initialCards = [
     }
 ];
 
-function addPost(name, link){
-    const postTemplate = document.querySelector('#post-template').content;
+function addCard(name, link){
     const postElement = postTemplate.cloneNode(true);
     const photoElement = postElement.querySelector('.element__item_input');
     const textElement = postElement.querySelector('.element__text_input');
@@ -64,7 +64,7 @@ function addPost(name, link){
 }
 
 initialCards.forEach(item => {
-    addPost(item.name, item.link);
+    addCard(item.name, item.link);
 });
 
 function showPopup(popup) {
@@ -86,7 +86,7 @@ function submitNewPostForm(evt) {
     evt.preventDefault();
     const name = postName.value;
     const link = postLink.value;
-    addPost(name, link);
+    addCard(name, link);
 }
 
 function addLikeEvent(element) {
