@@ -10,8 +10,9 @@ function hideError(form, input, config) {
     input.classList.remove(config.inputErrorClass);
 }
 
+
+
 function checkInputValidity (form, input, config) {
-    console.log('инпут' + input.validity.valid);
     if(!input.validity.valid) {
         showError(form, input, config);
     } else {
@@ -29,28 +30,30 @@ function setButtonState(button, isActive, config) {
     }
 }
 
-function setEventListeners(form, config) {
-    const inputsList = form.querySelectorAll(config.inputSelector);
-    const submitButton = form.querySelector(config.submitButtonSelector);
 
+function setEventListeners(form, config) {
+    const submitButton = form.querySelector(config.submitButtonSelector);
+    const inputsList = form.querySelectorAll(config.inputSelector);
+    setButtonState(submitButton, form.checkValidity(), config);
     inputsList.forEach((input) => {
         input.addEventListener('input', () => {
             checkInputValidity(form, input, config);
-            console.log('form1 ' +form.checkValidity());
             setButtonState(submitButton, form.checkValidity(), config);
         });
     })
 
 }
 
-function enableValidation() {
-    const config = validationConfig;
+function enableValidation(config) {
     const forms = document.querySelectorAll(config.formSelector);
     forms.forEach((form) => {
+        form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            // resetState(form);
+          });
+      
         setEventListeners(form, config);
-
         const submitButton = form.querySelector(config.submitButtonSelector);
-        console.log('form2 ' +form.checkValidity());
         setButtonState(submitButton, form.checkValidity(), config);
     });
 }
@@ -64,4 +67,4 @@ const validationConfig = {
     errorClass: 'popup__error_visible'
  };
 
- 
+ enableValidation(validationConfig);

@@ -1,14 +1,16 @@
 const popupList = document.querySelectorAll('.pop-up');
-const editProfilePopup = popupList[0];
-const addPostPopup = popupList[1];
-const openPhotoPopup = popupList[2];
+const editProfilePopup = document.querySelector('.pop-up_profile');
+const addPostPopup = document.querySelector('.pop-up_add-card');
+const openPhotoPopup = document.querySelector('.pop-up_picture');
+const popupImage = openPhotoPopup.querySelector('.pop-up__img');
+const imageTitle = openPhotoPopup.querySelector('.pop-up__post-title');
 const editProfileButton = document.querySelector('.profile__button-edit');
 const addPostButton = document.querySelector('.profile__button-add');
 const addButtonPost = document.querySelector('.pop-up__button-submit_photo');
 const closePopupButtons = document.querySelectorAll('.pop-up__button-close');
 const name = document.querySelector('.profile__name');
 const description = document.querySelector('.profile__description');
-const form = document.querySelector('.pop-up__form');
+const formProfile = document.querySelector('.pop-up__form_add');
 const formPost = document.querySelector('.pop-up__form_photo');
 const nameField = document.querySelector('.pop-up__input_name');
 const descriptionField = document.querySelector('.pop-up__input_description');
@@ -44,9 +46,9 @@ const initialCards = [
     }
 ];
 
-function addCard(name, link){
+function createCard(name, link) {
     const postElement = postTemplate.cloneNode(true);
-    const photoElement = postElement.querySelector('.element__item_input');
+    const photoElement = postElement.querySelector('.element__item_image');
     const textElement = postElement.querySelector('.element__text_input');
     const likeButton = postElement.querySelector('.element__button-like');
     const deleteButton = postElement.querySelector('.element__button-delete');
@@ -54,13 +56,20 @@ function addCard(name, link){
     photoElement.src = link;
     textElement.textContent = name;
 
-    addLikeEvent(likeButton);
-    postContainer.prepend(postElement);
     deleteButton.addEventListener('click', deletePosts);
     photoElement.addEventListener('click', _ => {
         openPhoto(link, name);
     });
-    closePopup(addPostPopup);
+
+    addLikeEvent(likeButton);
+
+    return postElement;
+}
+
+function addCard(name, link){
+    const postElement = createCard(name, link);
+    postContainer.prepend(postElement);
+   
 }
 
 initialCards.forEach(item => {
@@ -68,8 +77,8 @@ initialCards.forEach(item => {
 });
 
 function closePopup(popup) {
-    popup.classList.toggle('pop-up_opened'); 
-    document.removeEventListener('click', closePopupOverlay);
+    popup.classList.remove('pop-up_opened'); 
+    popup.removeEventListener('click', closePopupOverlay);
     document.removeEventListener('keydown', closePopupOnEscapeBtn);
 }
 
@@ -88,8 +97,10 @@ function closePopupOnEscapeBtn(evt) {
 
 function showPopup(popup) {
     popup.classList.add('pop-up_opened');
-    document.addEventListener('click', closePopupOverlay);
+    popup.addEventListener('click', closePopupOverlay);
     document.addEventListener('keydown', closePopupOnEscapeBtn);
+    // const form = popup.querySelector(validationConfig.formSelector);
+    // resetState(form);
 }
 
 function submitEditProfileForm(evt) {
@@ -104,6 +115,7 @@ function submitNewPostForm(evt) {
     const name = postName.value;
     const link = postLink.value;
     addCard(name, link);
+    closePopup(addPostPopup);
 }
 
 function addLikeEvent(element) {
@@ -119,21 +131,24 @@ function deletePosts(evt) {
   
 function openPhoto(photo, title) {
     showPopup(openPhotoPopup);
-    openPhotoPopup.querySelector('.pop-up__img').src = photo;
-    openPhotoPopup.querySelector('.pop-up__post-title').textContent = title;
+    popupImage.src = photo;
+    imageTitle.textContent = title;
 };
 
 formPost.addEventListener('submit', submitNewPostForm);
-form.addEventListener('submit', submitEditProfileForm);
+formProfile.addEventListener('submit', submitEditProfileForm);
+
 editProfileButton.addEventListener('click', _ => {
     showPopup(editProfilePopup);
     nameField.value = name.textContent;
     descriptionField.value = description.textContent;
-    enableValidation();
+    const form = editProfilePopup.querySelector(validationConfig.formSelector);
+    const submitButton = form.querySelector(validationConfig.submitButtonSelector);
+    setButtonState(submitButton, form.checkValidity(), validationConfig);
 });
+
 addPostButton.addEventListener('click', _ => {
     showPopup(addPostPopup);
-    enableValidation();
 });
 
 closePopupButtons.forEach (button => {
