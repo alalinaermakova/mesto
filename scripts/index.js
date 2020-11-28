@@ -99,8 +99,6 @@ function showPopup(popup) {
     popup.classList.add('pop-up_opened');
     popup.addEventListener('click', closePopupOverlay);
     document.addEventListener('keydown', closePopupOnEscapeBtn);
-    // const form = popup.querySelector(validationConfig.formSelector);
-    // resetState(form);
 }
 
 function submitEditProfileForm(evt) {
@@ -142,12 +140,14 @@ editProfileButton.addEventListener('click', _ => {
     showPopup(editProfilePopup);
     nameField.value = name.textContent;
     descriptionField.value = description.textContent;
+    // если я удаляю ее, то при открытии редактирования профиля кнопка 'сохранить' неактивна, но данные же введены. 
     const form = editProfilePopup.querySelector(validationConfig.formSelector);
     const submitButton = form.querySelector(validationConfig.submitButtonSelector);
     setButtonState(submitButton, form.checkValidity(), validationConfig);
 });
 
 addPostButton.addEventListener('click', _ => {
+    formPost.reset();
     showPopup(addPostPopup);
 });
 

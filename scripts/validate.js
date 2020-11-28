@@ -10,8 +10,6 @@ function hideError(form, input, config) {
     input.classList.remove(config.inputErrorClass);
 }
 
-
-
 function checkInputValidity (form, input, config) {
     if(!input.validity.valid) {
         showError(form, input, config);
@@ -49,12 +47,8 @@ function enableValidation(config) {
     forms.forEach((form) => {
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            // resetState(form);
           });
-      
         setEventListeners(form, config);
-        const submitButton = form.querySelector(config.submitButtonSelector);
-        setButtonState(submitButton, form.checkValidity(), config);
     });
 }
 
