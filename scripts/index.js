@@ -1,12 +1,11 @@
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
 const popupList = document.querySelectorAll('.pop-up');
 const editProfilePopup = document.querySelector('.pop-up_profile');
 const addPostPopup = document.querySelector('.pop-up_add-card');
-const openPhotoPopup = document.querySelector('.pop-up_picture');
-const popupImage = openPhotoPopup.querySelector('.pop-up__img');
-const imageTitle = openPhotoPopup.querySelector('.pop-up__post-title');
 const editProfileButton = document.querySelector('.profile__button-edit');
 const addPostButton = document.querySelector('.profile__button-add');
-const addButtonPost = document.querySelector('.pop-up__button-submit_photo');
 const closePopupButtons = document.querySelectorAll('.pop-up__button-close');
 const name = document.querySelector('.profile__name');
 const description = document.querySelector('.profile__description');
@@ -17,7 +16,19 @@ const descriptionField = document.querySelector('.pop-up__input_description');
 const postContainer = document.querySelector('.elements');
 const postName = document.querySelector('.pop-up__input_post-name');
 const postLink = document.querySelector('.pop-up__input_post-link');
-const postTemplate = document.querySelector('#post-template').content;
+
+const validationConfig = {
+    formSelector: '.pop-up__form',
+    inputSelector: '.pop-up__input',
+    submitButtonSelector: '.pop-up__button-submit',
+    inactiveButtonClass: 'pop-up__button-submit_disabled',
+    inputErrorClass: 'pop-up__input_error',
+    errorClass: 'popup__error_visible'
+ };
+
+const formProfileValidation = new FormValidator(validationConfig, formProfile);
+const newFormPostValidation = new FormValidator(validationConfig, formPost);
+newFormPostValidation.enableValidation();
 
 const initialCards = [
     {
@@ -46,30 +57,9 @@ const initialCards = [
     }
 ];
 
-function createCard(name, link) {
-    const postElement = postTemplate.cloneNode(true);
-    const photoElement = postElement.querySelector('.element__item_image');
-    const textElement = postElement.querySelector('.element__text_input');
-    const likeButton = postElement.querySelector('.element__button-like');
-    const deleteButton = postElement.querySelector('.element__button-delete');
-
-    photoElement.src = link;
-    textElement.textContent = name;
-
-    deleteButton.addEventListener('click', deletePosts);
-    photoElement.addEventListener('click', _ => {
-        openPhoto(link, name);
-    });
-
-    addLikeEvent(likeButton);
-
-    return postElement;
-}
-
-function addCard(name, link){
-    const postElement = createCard(name, link);
-    postContainer.prepend(postElement);
-   
+function addCard(postTitle, postImage) {
+    const postElement = new Card(postTitle, postImage);
+    postContainer.prepend(postElement.generateCard());
 }
 
 initialCards.forEach(item => {
@@ -80,6 +70,7 @@ function closePopup(popup) {
     popup.classList.remove('pop-up_opened'); 
     popup.removeEventListener('click', closePopupOverlay);
     document.removeEventListener('keydown', closePopupOnEscapeBtn);
+    resetValidation(popup);
 }
 
 function closePopupOverlay(evt) {
@@ -95,10 +86,18 @@ function closePopupOnEscapeBtn(evt) {
     } 
 };
 
-function showPopup(popup) {
+export function showPopup(popup) {
     popup.classList.add('pop-up_opened');
     popup.addEventListener('click', closePopupOverlay);
     document.addEventListener('keydown', closePopupOnEscapeBtn);
+}
+
+function resetValidation(popup) {
+    if (popup.classList.contains('pop-up_profile')) {
+        formProfileValidation.reset();
+    } else if (popup.classList.contains('pop-up_add-card')) {
+        newFormPostValidation.reset();
+    }
 }
 
 function submitEditProfileForm(evt) {
@@ -110,44 +109,25 @@ function submitEditProfileForm(evt) {
 
 function submitNewPostForm(evt) {
     evt.preventDefault();
-    const name = postName.value;
-    const link = postLink.value;
-    addCard(name, link);
+    const postTitle = postName.value;
+    const postImage = postLink.value;
+    addCard(postTitle, postImage);
     closePopup(addPostPopup);
 }
 
-function addLikeEvent(element) {
-    element.addEventListener('click', evt => {
-        evt.target.classList.toggle('element__button-like_active');
-    })
-};
-
-function deletePosts(evt) {
-    const eventTarget = evt.target;
-    eventTarget.closest('.element').remove();
-};
-  
-function openPhoto(photo, title) {
-    showPopup(openPhotoPopup);
-    popupImage.src = photo;
-    imageTitle.textContent = title;
-};
-
 formPost.addEventListener('submit', submitNewPostForm);
+
 formProfile.addEventListener('submit', submitEditProfileForm);
 
 editProfileButton.addEventListener('click', _ => {
     showPopup(editProfilePopup);
     nameField.value = name.textContent;
     descriptionField.value = description.textContent;
-    // если я удаляю ее, то при открытии редактирования профиля кнопка 'сохранить' неактивна, но данные же введены. 
-    const form = editProfilePopup.querySelector(validationConfig.formSelector);
-    const submitButton = form.querySelector(validationConfig.submitButtonSelector);
-    setButtonState(submitButton, form.checkValidity(), validationConfig);
+    formProfileValidation.enableValidation();
 });
 
 addPostButton.addEventListener('click', _ => {
-    formPost.reset();
+    newFormPostValidation.reset();
     showPopup(addPostPopup);
 });
 
