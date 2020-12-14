@@ -27,9 +27,9 @@
                     <template id="post-template">
                         <li class="element">
                             <button class="element__button-delete" type="button"></button>
-                            <img class="element__item element__item_image">
+                            <img class="element__item element__item_image" alt="#" src="#">
                             <div class="element__like-bar">
-                                <h3 class="element__description element__text_input"></h3>
+                                <h3 class="element__description element__description_input"></h3>
                                 <button type="button" class="element__button-like"></button>
                             </div>
                         </li>
@@ -42,9 +42,9 @@
                     <h2 class="pop-up__title">Редактировать профиль</h2>
                     <form class="pop-up__form pop-up__form_add" name="form">
                         <input id="input-name" name="name" type="text" placeholder="Имя" class="pop-up__input pop-up__input_name"  minlength="2" maxlength="200" required>
-                        <span id="input-name-error" class="popup__error_visible"></span>
+                        <span id="input-name-error" class="popup__error-visible"></span>
                         <input id="input-description" name="description" type="text" placeholder="O себе" class="pop-up__input pop-up__input_description"  maxlength="400" minlength="2" required>
-                        <span id="input-description-error" class="popup__error_visible"></span>
+                        <span id="input-description-error" class="popup__error-visible"></span>
                         <button type="submit" class="pop-up__button-submit">Сохранить</button>
                     </form>
                 </div>
@@ -55,9 +55,9 @@
                     <h2 class="pop-up__title">Новое место</h2>
                     <form class="pop-up__form pop-up__form_photo" name="form">
                         <input id="input_post-title" name="name" type="text" placeholder="Название" class="pop-up__input pop-up__input_post-name"  minlength="2" maxlength="30" required>
-                        <span id="input_post-title-error" class="popup__error_visible"></span>
+                        <span id="input_post-title-error" class="popup__error-visible"></span>
                         <input id="input_url" name="description" type="url" placeholder="Ссылка на картинку" class="pop-up__input pop-up__input_post-link" required>
-                        <span id="input_url-error" class="popup__error_visible"></span>
+                        <span id="input_url-error" class="popup__error-visible"></span>
                         <button type="submit" class="pop-up__button-submit pop-up__button-submit_photo">Создать</button>
                     </form>
                 </div>
@@ -65,7 +65,7 @@
             <div class="pop-up pop-up_picture">
                 <div class="pop-up__photo-content">
                     <button class="pop-up__button-close" type="button"></button>
-                    <img class="pop-up__img">
+                    <img class="pop-up__img" alt="#" src="#">
                     <p class="pop-up__post-title"></p>
                 </div> 
             </div>

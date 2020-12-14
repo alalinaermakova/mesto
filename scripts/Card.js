@@ -53,7 +53,7 @@ export class Card {
         this._setEventListeners();
 
         this._element.querySelector('.element__item_image').src = this._image;
-        this._element.querySelector('.element__text_input').textContent = this._title;
+        this._element.querySelector('.element__description_input').textContent = this._title;
 
         
 
