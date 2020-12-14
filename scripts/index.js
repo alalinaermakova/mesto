@@ -23,7 +23,7 @@ const validationConfig = {
     submitButtonSelector: '.pop-up__button-submit',
     inactiveButtonClass: 'pop-up__button-submit_disabled',
     inputErrorClass: 'pop-up__input_error',
-    errorClass: 'popup__error-visible'
+    errorClass: 'pop-up__error-visible'
  };
 
 const formProfileValidation = new FormValidator(validationConfig, formProfile);
