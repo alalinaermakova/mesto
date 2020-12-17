@@ -75,12 +75,12 @@ export class FormValidator {
 
     reset() {
         const errorMessages = this._form.querySelectorAll(`.${this._errorClass}`);
-        this._form.reset();
         errorMessages.forEach((item) => {
             item.textContent = '';
         });
         this._inputList.forEach((input) => {
             input.classList.remove(this._inputErrorClass);
-        })
+        });
+        this._toggleButtonState();
     }
 }

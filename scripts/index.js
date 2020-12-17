@@ -1,5 +1,6 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
+import { validationConfig, initialCards } from './constants.js';
 
 const popupList = document.querySelectorAll('.pop-up');
 const editProfilePopup = document.querySelector('.pop-up_profile');
@@ -16,61 +17,27 @@ const descriptionField = document.querySelector('.pop-up__input_description');
 const postContainer = document.querySelector('.elements');
 const postName = document.querySelector('.pop-up__input_post-name');
 const postLink = document.querySelector('.pop-up__input_post-link');
-
-const validationConfig = {
-    formSelector: '.pop-up__form',
-    inputSelector: '.pop-up__input',
-    submitButtonSelector: '.pop-up__button-submit',
-    inactiveButtonClass: 'pop-up__button-submit_disabled',
-    inputErrorClass: 'pop-up__input_error',
-    errorClass: 'pop-up__error-visible'
- };
+const openedPhotoPopup = document.querySelector('.pop-up_picture');
+const cardTemplate = document.querySelector('#post-template');
 
 const formProfileValidation = new FormValidator(validationConfig, formProfile);
+formProfileValidation.enableValidation();
 const newFormPostValidation = new FormValidator(validationConfig, formPost);
 newFormPostValidation.enableValidation();
 
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
-
-function addCard(postTitle, postImage) {
-    const postElement = new Card(postTitle, postImage);
+function addCard(item) {
+    const postElement = new Card(item, cardTemplate, openPhoto);
     postContainer.prepend(postElement.generateCard());
 }
 
 initialCards.forEach(item => {
-    addCard(item.name, item.link);
+    addCard(item);
 });
 
 function closePopup(popup) {
     popup.classList.remove('pop-up_opened'); 
     popup.removeEventListener('click', closePopupOverlay);
     document.removeEventListener('keydown', closePopupOnEscapeBtn);
-    resetValidation(popup);
 }
 
 function closePopupOverlay(evt) {
@@ -81,14 +48,14 @@ function closePopupOverlay(evt) {
 
 function closePopupOnEscapeBtn(evt) {
     if (evt.key === 'Escape') {
-        const shownPopup = Array.from(popupList).find(element => element.classList.contains('pop-up_opened'));
+        const shownPopup = document.querySelector('.pop-up_opened');
         closePopup(shownPopup);
     } 
 };
 
 export function showPopup(popup) {
     popup.classList.add('pop-up_opened');
-    popup.addEventListener('click', closePopupOverlay);
+    popup.addEventListener('mouseup', closePopupOverlay);
     document.addEventListener('keydown', closePopupOnEscapeBtn);
 }
 
@@ -111,8 +78,15 @@ function submitNewPostForm(evt) {
     evt.preventDefault();
     const postTitle = postName.value;
     const postImage = postLink.value;
-    addCard(postTitle, postImage);
+    const item = { name: postTitle, link: postImage };
+    addCard(item);
     closePopup(addPostPopup);
+}
+
+function openPhoto(photo, title) {
+    showPopup(openedPhotoPopup);
+    openedPhotoPopup.querySelector('.pop-up__img').src = photo;
+    openedPhotoPopup.querySelector('.pop-up__post-title').textContent = title;
 }
 
 formPost.addEventListener('submit', submitNewPostForm);
@@ -121,14 +95,18 @@ formProfile.addEventListener('submit', submitEditProfileForm);
 
 editProfileButton.addEventListener('click', _ => {
     showPopup(editProfilePopup);
+    
     nameField.value = name.textContent;
     descriptionField.value = description.textContent;
-    formProfileValidation.enableValidation();
+    resetValidation(editProfilePopup);
+    
 });
 
 addPostButton.addEventListener('click', _ => {
-    newFormPostValidation.reset();
+    formPost.reset();
+    resetValidation(addPostPopup);
     showPopup(addPostPopup);
+    
 });
 
 closePopupButtons.forEach (button => {
