@@ -1,5 +1,6 @@
 .element__item {
-    max-height: 282px;
+    height: 295px;
+    display: block;
     min-width: 282px;
     cursor: pointer;
 }
