@@ -44,11 +44,8 @@ export default class Card {
 
         this._element.querySelector('.element__description_input').textContent = this._title;
         this._element.querySelector('.element__item_image').src = this._image;
-        
-
-
-        return this._element;
-        
+    
+        return this._element;        
     }
 
 }

@@ -28,7 +28,7 @@ export const openedPhotoPopupImage = '.pop-up__img';
 export const openedPhotoPopupTitle = '.pop-up__post-title';
 
 export const cardTemplateSelector = document.querySelector('#post-template');
-export const postContainer = document.querySelector('.elements');
+export const postContainer = '.elements';
 
 export const initialCards = [
     {
