@@ -11,7 +11,10 @@
                 <img class="logo" alt="лого место россия" src="<%=require('./images/logo.svg')%>">
             </header>
             <section class="profile">
-                <img class="profile__img" alt="фото Жак-Ив Кусто" src="<%=require('./images/image.png')%>">
+                <div>
+                    <img class="profile__img" alt="фото Жак-Ив Кусто" src="<%=require('./images/image.png')%>">
+                    <button type="button" class="profile__button-edit_avatar"></button>
+                </div>
                 <div class="profile__info">
                     <div class="profile__edit">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -29,7 +32,10 @@
                             <img class="element__item element__item_image" alt="#" src="#">
                             <div class="element__like-bar">
                                 <h3 class="element__description element__description_input"></h3>
-                                <button type="button" class="element__button-like"></button>
+                                <div class="element__like-counter">
+                                    <button type="button" class="element__button-like"></button>
+                                    <p class="element__likes-number"></p>
+                                </div>
                             </div>
                         </li>
                     </template>
@@ -67,6 +73,24 @@
                     <img class="pop-up__img" alt="#" src="#">
                     <p class="pop-up__post-title"></p>
                 </div> 
+            </div>
+            <div class="pop-up pop-up_delete-confirmation">
+                <div class="pop-up__content">
+                    <button class="pop-up__button-close" type="button"></button>
+                    <h2 class="pop-up__title">Вы уверены?</h2>
+                        <button type="submit" class="pop-up__button-submit pop-up__button-submit_yes-btn">Да</button>
+                </div>
+            </div>
+            <div class="pop-up pop-up_avatar-change">
+                <div class="pop-up__content">
+                    <button class="pop-up__button-close" type="button"></button>
+                    <h2 class="pop-up__title">Обновить аватар</h2>
+                    <form class="pop-up__form pop-up__form_avatar" name="form"></form>
+                    <input id="input_url" type="url" placeholder="Ссылка на картинку" class="pop-up__input pop-up__input_avatar-link" required>
+                    <span class="pop-up__error-visible"></span>
+                        <button type="submit" class="pop-up__button-submit">Сохранить</button>
+                    </form>
+                </div>
             </div>
         </main>
         <footer class="footer">

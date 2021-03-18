@@ -10,7 +10,16 @@ export default class Section {
     }
 
     addItem(element) {
+        this._container.append(element);
+    }
+
+    prependItem(element){
         this._container.prepend(element);
+    }
+
+    addCards(cards){
+        this._items = this._items.concat(cards);
+        this.renderItems()
     }
 
     renderItems() {
