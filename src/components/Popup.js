@@ -3,6 +3,7 @@ export default class Popup {
     constructor(popupSelector) {
         this._popup = document.querySelector(popupSelector);
         this._buttonCLose = this._popup.querySelector('.pop-up__button-close');
+        this._buttonSubmit = this._popup.querySelector('.pop-up__button-submit');
 
         this._handleEscClose = (evt) => {
            if (evt.key === 'Escape') {
@@ -27,6 +28,15 @@ export default class Popup {
     close(){
         this._popup.classList.remove('pop-up_opened');
         document.removeEventListener('keydown', this._handleEscClose);
+    }
+
+    setProgress(text){
+        this._buttonSubmit.textContent = text;
+    }
+
+
+    resetProgress(text) {
+        this._buttonSubmit.textContent = text;
     }
 
     setEventListeners(){

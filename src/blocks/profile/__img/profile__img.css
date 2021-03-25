@@ -1,42 +1,11 @@
 .profile__img {
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 25px;
-    margin-top: 36px;
     width: 127px;
     height: 127px;
-    position: relative;
     object-fit: cover;
-    cursor: pointer;
-    position: relative;
-
-}
-
-.profile__img:hover{
-    visibility: visible;
 }
 
 @media screen and (max-width: 700px) {
     .profile__img {
-        margin: 38px auto 0;
+        margin: auto 0;
     }
-}
-
-.profile__button-edit_avatar{
-    position: absolute;
-    border: none;
-    background-color: rgba(0, 0, 0, 0.8);
-    background-image: url(../../../images/editavatarbtn.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    cursor: pointer;
-    height: 26px;
-    width: 26px;
-    margin-top: 85px;
-    margin-left: -100px;
-    display: none;
-}
-
-.profile__button-edit_avatar:hover{
-    display: inherit;
 }

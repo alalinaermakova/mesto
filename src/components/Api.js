@@ -1,48 +1,192 @@
+
 export default class Api {
-    contructor({adress, token, groupId}) {
-        this._adress = adress;
-        this._token = token;
-        this._groupId = groupId;
+    constructor(config) {
+        this._baseUrl = config.baseUrl;
+        this._token = config.headers.authorization;
     }
 
-    getCardElement(){
-        return fetch(`${this._adress}/messages`, {
+    getInfo({updInfo}){
+        return fetch(`${this._baseUrl}/users/me`, {
+            method: 'GET',
             headers: {
-                autorization: this._token
+                authorization: this._token
             }
         })
-            .then(response => {
-                if(response.ok) {
-                    return response.json();
-                }
-
-                return Promise.reject(`Ошибка ${response}`)
-            })
+        .then(res => {
+            if(res.ok) {
+                return res.json();
+            } else {
+                return Promise.reject(`Ошибка ${res.status}`)
+            }
+        })
+        .then((data) => {
+            updInfo(data)
+        })
+        .catch((err) => {
+            console.log(err);
+          })
     }
 
-    addCardElement(data) {
-        return fetch(`${this._adress}/messages`, {
-            method: 'POST',
+    getCards({onSuccess}){
+        return fetch(`${this._baseUrl}/cards`, {
+            method: 'GET',
             headers: {
-                autorization: this._token,
+                authorization: this._token
+            }
+        })
+            .then(res => {
+                if(res.ok) {
+                    return res.json();
+                } else {
+                    return Promise.reject(`Ошибка ${res.status}`)
+                }
+            })
+            .then((cards) => {
+                onSuccess(cards)
+            })
+            .catch((err) => {
+                console.log(err);
+              })
+    }
+
+    updateUserInfo(name, description, {setInfo}) {
+        return fetch(`${this._baseUrl}/users/me`,{
+            method: 'PATCH',
+            headers: {
+                authorization: this._token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-
-            }),
-        
-        })
-            .then(result => result.ok ? result.json() : Promise.reject(`Ошибка ${result.status}`))
+                name: name,
+                about: description
+              })
+            })
+            .then(res => {
+                if(res.ok) {
+                    return res.json();
+                } else {
+                    return Promise.reject(`Ошибка ${res.status}`)
+                }
+            })
+            .then((data) => {
+                setInfo(data)
+            })
+            .catch((err) => {
+                console.log(err);
+              })
     }
 
-    deleteCardElement(){
-        return fetch(`${this.url}/cards/${cardid}`, {
+    setNewAvatar(avatar){
+        return fetch(`${this._baseUrl}/users/me/avatar`,{
+            method: 'PATCH',
+            headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                avatar: avatar
+              })
+            })
+            .then(res => {
+                if(res.ok) {
+                    return res.json();
+                } else {
+                    return Promise.reject(`Ошибка ${res.status}`)
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+              })
+    }
+
+    addNewPost(title, image, {onSuccess}){
+        return fetch(`${this._baseUrl}/cards`, {
+            method: 'POST',
+            headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: title,
+                link: image
+            })
+        })
+        .then(res => {
+            if(res.ok) {
+                return res.json();
+            } else {
+                return Promise.reject(`Ошибка ${res.status}`)
+            }
+        })
+        .then((data) => {
+            onSuccess(data)
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+
+    deleteYourCard(cardId){
+        return fetch (`${this._baseUrl}/cards/${cardId}`, {
             method: 'DELETE',
             headers: {
-                autorization: this._token,
+                authorization: this._token,
                 'Content-Type': 'application/json'
             }
         })
-            .then(result => result.ok ? result.json() : Promise.reject(`Ошибка ${result.status}`))
+        .then(res => {
+            if(res.ok) {
+                return res.json();
+            } else {
+                return Promise.reject(`Ошибка ${res.status}`)
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+          })
     }
+
+    setLike(cardId){
+        return fetch (`${this._baseUrl}/cards/likes/${cardId}`, {
+            method: 'PUT',
+            headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => {
+            if(res.ok) {
+                return res.json();
+            } else {
+                return Promise.reject(`Ошибка ${res.status}`)
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+          })
+
+    }
+
+    removeLike(cardId){
+        return fetch (`${this._baseUrl}/cards/likes/${cardId}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => {
+            if(res.ok) {
+                return res.json();
+            } else {
+                return Promise.reject(`Ошибка ${res.status}`)
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+          })
+    }
+
+
+
 }

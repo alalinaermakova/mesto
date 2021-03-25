@@ -23,6 +23,10 @@ export default class UserInfo {
         this._descriptionElement.textContent = newDescription;
     }
 
+    setAvatar(avatar){
+        this._avatarElement.src = avatar;
+    }
+
     updateUserInfo(newName, newAboutInfo, newAvatar, userId){
         this._nameElement.textContent = newName;
         this._descriptionElement.textContent = newAboutInfo;

@@ -11,9 +11,9 @@
                 <img class="logo" alt="лого место россия" src="<%=require('./images/logo.svg')%>">
             </header>
             <section class="profile">
-                <div>
+                <div class="profile__avatar-container">
+                    <button type="button" class="profile__button-edit-avatar"></button>
                     <img class="profile__img" alt="фото Жак-Ив Кусто" src="<%=require('./images/image.png')%>">
-                    <button type="button" class="profile__button-edit_avatar"></button>
                 </div>
                 <div class="profile__info">
                     <div class="profile__edit">
@@ -63,7 +63,7 @@
                         <span id="input_post-title-error" class="pop-up__error-visible"></span>
                         <input id="input_url" name="description" type="url" placeholder="Ссылка на картинку" class="pop-up__input pop-up__input_post-link" required>
                         <span id="input_url-error" class="pop-up__error-visible"></span>
-                        <button type="submit" class="pop-up__button-submit pop-up__button-submit_photo">Создать</button>
+                        <button type="submit" class="pop-up__button-submit">Создать</button>
                     </form>
                 </div>
             </div>
@@ -85,9 +85,9 @@
                 <div class="pop-up__content">
                     <button class="pop-up__button-close" type="button"></button>
                     <h2 class="pop-up__title">Обновить аватар</h2>
-                    <form class="pop-up__form pop-up__form_avatar" name="form"></form>
-                    <input id="input_url" type="url" placeholder="Ссылка на картинку" class="pop-up__input pop-up__input_avatar-link" required>
-                    <span class="pop-up__error-visible"></span>
+                    <form class="pop-up__form pop-up__form_avatar" name="form">
+                        <input id="input_avatar" name="description" type="url" placeholder="Ссылка на картинку" class="pop-up__input pop-up__input_avatar-link" required>    
+                        <span id="input_avatar-error" class="pop-up__error-visible"></span>
                         <button type="submit" class="pop-up__button-submit">Сохранить</button>
                     </form>
                 </div>

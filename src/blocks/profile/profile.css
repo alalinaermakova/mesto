@@ -1,6 +1,7 @@
 .profile {
     margin: auto;
     display: flex;
+    padding-top: 38px;
     flex-direction: row;
     align-items: center;
 }
