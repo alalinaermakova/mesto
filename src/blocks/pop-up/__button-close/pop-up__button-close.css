@@ -4,7 +4,7 @@
     background-color: unset;
     border: unset;
     position: absolute;
-    background-image: url(../../../images/Close\ Icon.svg);
+    background-image: url(../../../images/Close_Icon.svg);
     background-position: center;
     top: -40px;
     right: -40px;
@@ -18,7 +18,7 @@
 
 @media screen and (max-width: 660px) {
     .pop-up__button-close {
-        background-image: url(../../../images/Close\ Icon\ copy.svg);
+        background-image: url(../../../images/Close_Icon_copy.svg);
         top: -34px;
         right: -34px;
     }

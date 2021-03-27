@@ -5,7 +5,14 @@ export default class Api {
         this._token = config.headers.authorization;
     }
 
-    getInfo({updInfo}){
+    _getResponseData(res){
+        if (!res.ok) {
+            return Promise.reject(`Ошибка: ${res.status}`); 
+        }
+        return res.json();
+    }
+
+    getInfo(){
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'GET',
             headers: {
@@ -13,43 +20,23 @@ export default class Api {
             }
         })
         .then(res => {
-            if(res.ok) {
-                return res.json();
-            } else {
-                return Promise.reject(`Ошибка ${res.status}`)
-            }
+            return this._getResponseData(res)
         })
-        .then((data) => {
-            updInfo(data)
-        })
-        .catch((err) => {
-            console.log(err);
-          })
     }
 
-    getCards({onSuccess}){
+    getCards(){
         return fetch(`${this._baseUrl}/cards`, {
             method: 'GET',
             headers: {
                 authorization: this._token
             }
         })
-            .then(res => {
-                if(res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Ошибка ${res.status}`)
-                }
-            })
-            .then((cards) => {
-                onSuccess(cards)
-            })
-            .catch((err) => {
-                console.log(err);
-              })
+        .then(res => {
+            return this._getResponseData(res)
+        })
     }
 
-    updateUserInfo(name, description, {setInfo}) {
+    updateUserInfo(name, description) {
         return fetch(`${this._baseUrl}/users/me`,{
             method: 'PATCH',
             headers: {
@@ -62,18 +49,8 @@ export default class Api {
               })
             })
             .then(res => {
-                if(res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Ошибка ${res.status}`)
-                }
+                return this._getResponseData(res)
             })
-            .then((data) => {
-                setInfo(data)
-            })
-            .catch((err) => {
-                console.log(err);
-              })
     }
 
     setNewAvatar(avatar){
@@ -88,18 +65,11 @@ export default class Api {
               })
             })
             .then(res => {
-                if(res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Ошибка ${res.status}`)
-                }
+                return this._getResponseData(res)
             })
-            .catch((err) => {
-                console.log(err);
-              })
     }
 
-    addNewPost(title, image, {onSuccess}){
+    addNewPost(title, image){
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: {
@@ -112,17 +82,7 @@ export default class Api {
             })
         })
         .then(res => {
-            if(res.ok) {
-                return res.json();
-            } else {
-                return Promise.reject(`Ошибка ${res.status}`)
-            }
-        })
-        .then((data) => {
-            onSuccess(data)
-        })
-        .catch((err) => {
-            console.log(err);
+            return this._getResponseData(res)
         })
     }
 
@@ -135,15 +95,8 @@ export default class Api {
             }
         })
         .then(res => {
-            if(res.ok) {
-                return res.json();
-            } else {
-                return Promise.reject(`Ошибка ${res.status}`)
-            }
+            return this._getResponseData(res)
         })
-        .catch((err) => {
-            console.log(err);
-          })
     }
 
     setLike(cardId){
@@ -155,15 +108,8 @@ export default class Api {
             }
         })
         .then(res => {
-            if(res.ok) {
-                return res.json();
-            } else {
-                return Promise.reject(`Ошибка ${res.status}`)
-            }
+            return this._getResponseData(res)
         })
-        .catch((err) => {
-            console.log(err);
-          })
 
     }
 
@@ -176,15 +122,8 @@ export default class Api {
             }
         })
         .then(res => {
-            if(res.ok) {
-                return res.json();
-            } else {
-                return Promise.reject(`Ошибка ${res.status}`)
-            }
+            return this._getResponseData(res)
         })
-        .catch((err) => {
-            console.log(err);
-          })
     }
 
 

@@ -45,11 +45,18 @@ const userInfo = new UserInfo(nameField, descriptionField, newAvatarField);
 const popupWithImage = new PopupWithImage(openedPhotoPopupSelector, openedPhotoPopupImage, openedPhotoPopupTitle);
 const popupRemoveCardConfirm = new PopupConfirmation(confirmationPopupSelector, yesButtonSelector, {
     handleConfirmation: (card) => {
-        api.deleteYourCard(card.getCardId());
         popupRemoveCardConfirm.setProgress('Удаляю...');
-        card.removeCard()
-        popupRemoveCardConfirm.close();
-        popupRemoveCardConfirm.resetProgress('Да');
+        api.deleteYourCard(card.getCardId())
+            .then(() => {
+                card.removeCard()
+                popupRemoveCardConfirm.close();
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+            .finally(() => {
+                popupRemoveCardConfirm.resetProgress('Да');
+            })
     }
 });
 
@@ -61,11 +68,36 @@ const api = new Api({
     }
 });
 
-api.getInfo({
-    updInfo: (data) => {
-        userInfo.updateUserInfo(data.name, data.about, data.avatar, data._id);
+Promise.all([
+    api.getInfo(),
+    api.getCards()
+])
+.then(([data, cards]) => {
+    userInfo.updateUserInfo(data.name, data.about, data.avatar, data._id);
+    defaultCardList.addCards(cards);
+})
+.catch((err) => {
+    console.log(err)
+})
+
+const popupProfile = new PopupWithForm(editProfilePopupSelector, {
+    handleSubmitForm: (values) => {
+        popupProfile.setProgress('Загрузка...');
+        api.updateUserInfo(values[0], values[1])
+            .then((data) => {
+                userInfo.setUserInfo(data.name, data.about);
+                popupProfile.close();
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+            .finally(() => {
+                popupProfile.resetProgress('Сохранить');
+            })
+                
     }
 })
+
 
 const defaultCardList = new Section({
     items: [],
@@ -79,10 +111,6 @@ const defaultCardList = new Section({
     }
 }, postContainer);
 
-api.getCards({onSuccess: (cards) => {
-    defaultCardList.addCards(cards)
-}});
-
 function createCardElement(title, image, cardOwnerId, cardId, likes) {
     const card = new Card(title, image, cardTemplateSelector, likes.length, cardId, {
         handleOpenPopupPhoto: (placeTitle, placeImage) => {
@@ -94,11 +122,16 @@ function createCardElement(title, image, cardOwnerId, cardId, likes) {
         },
         handleLikeEvt: (isLiked) => {
             if (isLiked) {
-                api.removeLike(card.getCardId());
-                card.removeLike();
+                api.removeLike(card.getCardId())
+                .then(() => {
+                    card.removeLike();
+                })
             } else {
-                api.setLike(card.getCardId());
-                card.addLike();
+                api.setLike(card.getCardId())
+                .then(() => {
+                    card.addLike();
+                })
+                
             }
         }
     });
@@ -113,40 +146,35 @@ function createCardElement(title, image, cardOwnerId, cardId, likes) {
 
 const popupAddPost = new PopupWithForm(addPostPopupSelector, {
     handleSubmitForm: (values) => {
-        const title = values[0];
-        const image = values[1];
-        api.addNewPost(title, image, {
-            onSuccess: (data) => {
-                defaultCardList.prependItem(createCardElement(data.name, data.link, userInfo.getUserInfo().userId, data._id, []))
-            }
-        });
         popupAddPost.setProgress('Создаю...');
-        popupAddPost.close();
-        popupAddPost.resetProgress('Создать');
-    }
-});
-
-const popupProfile = new PopupWithForm(editProfilePopupSelector, {
-    handleSubmitForm: (values) => {
-        api.updateUserInfo(values[0], values[1], {
-            setInfo: (data) => {
-                userInfo.setUserInfo(data.name, data.about);
-            }
-        });
-        popupProfile.setProgress('Загрузка...');
-        popupProfile.close();
-        popupProfile.resetProgress('Сохранить');
+        api.addNewPost(values[0], values[1])
+            .then((data) => {
+                defaultCardList.prependItem(createCardElement(data.name, data.link, userInfo.getUserInfo().userId, data._id, []))
+                popupAddPost.close();
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+            .finally(() => {
+                popupAddPost.resetProgress('Создать');
+            })
     }
 });
 
 const popupNewAvatar = new PopupWithForm(newAvatarPopupSelector, {
     handleSubmitForm: (values) => {
-        const avatar = values[0];
-        api.setNewAvatar(avatar);
         popupNewAvatar.setProgress('Сохраняю...');
-        userInfo.setAvatar(avatar);
-        popupNewAvatar.close();
-        popupNewAvatar.resetProgress('Сохранить');
+        api.setNewAvatar(values[0])
+            .then((data) => {
+                userInfo.setAvatar(data.avatar);
+                popupNewAvatar.close();
+            })
+            .catch((err) => {
+                console.log(err + ' что-то пошло не так')
+            })
+            .finally(() => {
+                popupNewAvatar.resetProgress('Сохранить');
+            })
     }
 });
 
