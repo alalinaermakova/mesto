@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alalinaermakova/mestoobit.git"
+    "url": "git+https://github.com/alalinaermakova/mesto.git"
   },
   "author": "Ermakova Alina",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/alalinaermakova/mestoobit/issues"
+    "url": "https://github.com/alalinaermakova/mesto/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
