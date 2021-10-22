@@ -1,6 +1,6 @@
-###Mesto
+##Mesto
 
-###Описание
+##Описание
 
 * Проект сделан по макету в Фигме (ссылка ниже)
 * Адаптивная верстка под основные размеры 320 и 1280
@@ -10,7 +10,7 @@
 
  ---------------------------------
 
-###Планы на работу 
+##Планы на работу 
 
 * добавление картинок через кнопку на стр
 * смена аватара
@@ -19,15 +19,11 @@
 
  ---------------------------------
 
-**Figma**
-
-* [Ссылка на макет в Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
+* [Figma](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4)
 
 
  ---------------------------------
 
-**проект**
-
-* [Ссылка на проект](https://alalinaermakova.github.io/mesto/index.html)
+* [Project](https://alalinaermakova.github.io/mesto/)
 
 
