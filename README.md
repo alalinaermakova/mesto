@@ -1,20 +1,20 @@
-##Mesto
+# Mesto
 
-##Описание
+# Description
 
-* Проект сделан по макету в Фигме (ссылка ниже)
-* Адаптивная верстка под основные размеры 320 и 1280
-* работа с java script: измение имени и информации "о себе"
-* работа с грид
+* The project was made according to the layout in Figma (link below)
+* Adaptive layout for main sizes 320 and 1280
+* working with java script: changing the name and information "about myself"
+* work with grid
 
 
  ---------------------------------
 
-##Планы на работу 
+# Job plans
 
-* добавление картинок через кнопку на стр
-* смена аватара
-* ставить лайки и сохранять их 
+* adding pictures via the button on the page
+* change avatar
+* put likes and save them
 
 
  ---------------------------------
